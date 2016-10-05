@@ -17,6 +17,10 @@ function sendToDiscord (webhookUrls, webhookBody) {
   // Promises array
   let promises = [];
 
+  // Strip @everyone and @here
+  webhookBody = webhookBody.replace(/@everyone/gi, '[at]everyone');
+  webhookBody = webhookBody.replace(/@here/gi, '[at]here');
+
   // Send the requests
   for (let url of webhookUrls) {
     promises.push(request({
