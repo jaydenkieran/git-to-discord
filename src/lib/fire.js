@@ -265,3 +265,30 @@ exports.member = (req, res, next) => {
     });
   });
 };
+
+/**
+ * Fire webhooks for a public event.
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ */
+exports.public = (req, res, next) => {
+  // Generate the webhook body
+  let webhookBody = Mustache.render(templates.public, req.body);
+
+  // Send the webhooks
+  sendToDiscord(req.hook.discordWebhooks, webhookBody).then(() => {
+    res.send({
+      message: 'OK',
+      hint: 'Sent data successfully to ' + req.hook.discordWebhooks.length + ' hooks.'
+    });
+  }).catch(err => {
+    console.error('Failed to run hook on ' + req.body.repository.full_name + ':');
+    console.error(err);
+
+    res.status(500).send({
+      message: 'InternalServerError',
+      error: err
+    });
+  });
+};
