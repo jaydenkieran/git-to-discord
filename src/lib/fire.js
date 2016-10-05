@@ -47,6 +47,14 @@ exports.push = (req, res, next) => {
   req.body.head_commit.sha = req.body.head_commit.id.substr(0, 7);
   let webhookBody = Mustache.render(templates.push, req.body);
 
+  if (req.body.commits.length == 0) {
+    res.send({
+      message: 'OK',
+      hint: 'Assuming a new branch was made, discarding.'
+    });
+    return
+  }
+
   // Send the webhooks
   sendToDiscord(req.hook.discordWebhooks, webhookBody).then(() => {
     res.send({
@@ -159,6 +167,33 @@ exports.commit_comment = (req, res, next) => {
     req.body.comment.message += "..."
   }
   let webhookBody = Mustache.render(templates.commit_comment, req.body);
+
+  // Send the webhooks
+  sendToDiscord(req.hook.discordWebhooks, webhookBody).then(() => {
+    res.send({
+      message: 'OK',
+      hint: 'Sent data successfully to ' + req.hook.discordWebhooks.length + ' hooks.'
+    });
+  }).catch(err => {
+    console.error('Failed to run hook on ' + req.body.repository.full_name + ':');
+    console.error(err);
+
+    res.status(500).send({
+      message: 'InternalServerError',
+      error: err
+    });
+  });
+};
+
+/**
+ * Fire webhooks for a create event.
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ */
+exports.create = (req, res, next) => {
+  // Generate the webhook body
+  let webhookBody = Mustache.render(templates['create_' + req.body.ref_type], req.body);
 
   // Send the webhooks
   sendToDiscord(req.hook.discordWebhooks, webhookBody).then(() => {
