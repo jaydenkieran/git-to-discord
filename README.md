@@ -10,7 +10,7 @@ This means that `/register` is an open endpoint by default, and anyone can make 
 However, the code will check for duplicate repositories (but not organizations), so no one can re-register a repository.
 
 ### Installation
-Pull the code, run `npm install` in the directory, and run `node app.js` in the `src` directory.
+Pull the code, run `npm install` in the directory, copy `src/hooks.json.default` to `src/hooks.json`, and run `node app.js` in the `src` directory.
 If you would like to change the default port, use the `NODE_PORT` variable.
 
 ### Setting up webhooks
