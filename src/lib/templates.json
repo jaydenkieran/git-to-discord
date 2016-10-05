@@ -1,0 +1,5 @@
+{
+  "push": "{\"attachments\":[{\"author_icon\":\"{{{sender.avatar_url}}}\",\"author_link\":\"{{{sender.html_url}}}\",\"author_name\":\"{{{pusher.name}}}\",\"fallback\":\"{{{pusher.name}}} pushed {{{commits.length}}} commits to {{{repository.full_name}}}\",\"text\":\"`{{{head_commit.sha}}}`: {{{head_commit.message}}}\",\"footer\":\"{{{ref}}} now at {{{after}}}.\",\"title\":\"{{{commits.length}}} commits pushed to {{{repository.full_name}}}\",\"title_link\":\"{{{head_commit.url}}}\"}]}",
+  "ping_repository": "{\"text\": \"**PING!** Looks like the webhook for the `{{{repository.full_name}}}` repository on GitHub has been set up correctly. You can safely delete this message.\"}",
+  "ping_organization": "{\"text\": \"**PING!** Looks like the webhook for the `{{{organization.login}}}` organization on GitHub has been set up correctly. You can safely delete this message.\"}"
+}
