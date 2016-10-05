@@ -16,20 +16,8 @@ If you would like to change the default port, use the `NODE_PORT` variable.
 ### Setting up webhooks
 1. Open some sort of request making client like [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop) or `cURL`
 2. Send a POST request to `/register/repository` or `/register/organization`
-    - For a repository webhook, send the following data:
-      ```json
-      {
-        "repository": "username/repository-name",
-        "discordWebhooks": ["array of valid Discord webhooks without /slack"]
-      }
-      ```
-    - For a organization webhook, send the following data:
-      ```json
-      {
-        "organization": "username",
-        "discordWebhooks": ["array of valid Discord webhooks without /slack"]
-      }
-      ```
+    - For a repository webhook, send the following data: `{ "repository": "username/repository-name", "discordWebhooks": ["array of valid Discord webhooks without /slack"] }`
+    - For a organization webhook, send the following data: `{ "organization": "username", "discordWebhooks": ["array of valid Discord webhooks without /slack"] }`
 3. Record the data it returns, you need this information for later (and to view/delete the webhook at a later date)
 4. Depending on the hook type you created, you need to go to the repository or organization webhook settings page on GitHub
     - For a repository webhook, navigate to repository settings and then the *Webhooks* submenu
