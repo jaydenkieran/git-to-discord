@@ -49,7 +49,7 @@ app.use((req, res, next) => {
   if (!res.headersSent) {
     res.status(404).send({
       message: 'NotFound',
-      hint: 'Please read the documentation at https://github.com/deansheather/git-to-discord/README.md to find out how to link your GitHub repository/organization to Discord.'
+      hint: 'Please read the documentation at https://github.com/deansheather/git-to-discord to find out how to link your GitHub repository/organization to Discord.'
     });
   }
 });
